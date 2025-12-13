@@ -1,5 +1,5 @@
-# roles/haproxy_config/handlers/main.yml
-- name: Restart haproxy
-  systemd:
+---
+- name: Reload HAProxy
+  service:
     name: haproxy
-    state: restarted
+    state: reloaded
