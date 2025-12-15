@@ -42,11 +42,11 @@ haproxy_vhosts:
     type: tcp
     template: auth.devver.app.j2
 
-  - name: nextcloud
-    domain: nextcloud.vrhometech.fr
-    backend_ip: 192.168.20.3
-    backend_port: 11000
-    type: http
-    template: nextcloud.vrhometech.fr.j2
+  # - name: nextcloud
+  #   domain: nextcloud.vrhometech.fr
+  #   backend_ip: 192.168.20.3
+  #   backend_port: 11000
+  #   type: http
+  #   template: nextcloud.vrhometech.fr.j2
 
 
