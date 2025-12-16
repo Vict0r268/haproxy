@@ -1,6 +1,6 @@
 haproxy_vhosts:
   
-  - name: www
+  - name: www.devver.app
     frontend: 443
     type: tcp
     accept_rule: "{ req_ssl_sni -i www.devver.app }"
