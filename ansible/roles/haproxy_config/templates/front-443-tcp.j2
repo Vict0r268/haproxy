@@ -6,7 +6,9 @@ frontend tcp_443
     tcp-request content accept if { req_ssl_hello_type 1 }
 
 {% for vhost in haproxy_vhosts %}
-{% if vhost.backend_port == 443 and vhost.mode == 'tcp' and vhost.enabled | default(true) %}
-    use_backend {{ vhost.name }}_backend if { req_ssl_sni -i {{ vhost.domain }} }
+{% if vhost.frontend == 443 and vhost.type == 'tcp' %}
+    use_backend {{ vhost.name }}_backend if {{ vhost.accept_rule }}
 {% endif %}
 {% endfor %}
+
+    default_backend tcp_443_reject

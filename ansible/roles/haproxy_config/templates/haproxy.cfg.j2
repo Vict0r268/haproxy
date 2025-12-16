@@ -24,13 +24,10 @@ defaults
     errorfile 503 /etc/haproxy/errors/503.http
     errorfile 504 /etc/haproxy/errors/504.http
 
-# --- FRONTEND UNIQUE 443 ---
+# --- FRONTENDS ---
 {% include 'front-443-tcp.j2' %}
 
-
-# --- BACKENDS TCP ---
+# --- BACKENDS ---
 {% for vhost in haproxy_vhosts %}
-{% if vhost.mode == 'tcp' and vhost.enabled | default(true) and vhost.name != 'nextcloud' %}
-{% include 'vhosts/tcp-passthrough.j2' %}
-{% endif %}
+{% include 'vhosts/backend-tcp.j2' %}
 {% endfor %}
