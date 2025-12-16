@@ -2,3 +2,4 @@ backend {{ vhost.name }}_backend
     mode tcp
 
     server {{ vhost.name }} {{ vhost.backend.ip }}:{{ vhost.backend.port }} check
+
