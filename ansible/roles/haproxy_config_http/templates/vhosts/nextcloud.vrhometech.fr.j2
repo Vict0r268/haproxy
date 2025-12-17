@@ -1,0 +1,14 @@
+{# Template personnalisé pour Nextcloud avec support WebSocket #}
+backend {{ vhost.name }}_backend
+    mode http
+    option forwardfor
+    timeout server 86400s
+
+    server {{ vhost.name }} {{ vhost.backend_ip }}:{{ vhost.backend_port }} check
+
+backend {{ vhost.name }}_ws_backend
+    mode http
+    option forwardfor
+    timeout server 86400s
+
+    server {{ vhost.name }} {{ vhost.backend_ip }}:{{ vhost.backend_port }} check

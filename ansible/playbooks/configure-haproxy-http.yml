@@ -1,4 +1,4 @@
 - hosts: haproxy_http
   become: true
   roles:
-    - haproxy_acme
+    - haproxy_config_http

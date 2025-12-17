@@ -1,0 +1,15 @@
+frontend https_frontend
+    bind *:443 ssl crt /etc/haproxy/certs/
+    mode http
+    option forwardfor
+
+    acl is_websocket hdr(Upgrade) -i WebSocket
+    acl connection_upgrade hdr_beg(Connection) -i Upgrade
+
+{% for vhost in haproxy_http_vhosts if vhost.type == "http" %}
+{% if vhost.template is defined %}
+    {# Si le vhost a un template personnalisé (donc probablement du websocket), on ajoute les ACL websocket #}
+    use_backend {{ vhost.name }}_ws_backend if { hdr(host) -i {{ vhost.domain }} } is_websocket connection_upgrade
+{% endif %}
+    use_backend {{ vhost.name }}_backend    if { hdr(host) -i {{ vhost.domain }} }
+{% endfor %}

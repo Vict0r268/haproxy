@@ -7,11 +7,11 @@ global
     user haproxy
     group haproxy
     daemon
-    tune.ssl.default-dh-param 2048
+    #tune.ssl.default-dh-param 2048
 
 defaults
     log global
-    option tcplog
+    option httplog
     option dontlognull
     timeout connect 5000ms
     timeout client  86400s
@@ -24,10 +24,24 @@ defaults
     errorfile 503 /etc/haproxy/errors/503.http
     errorfile 504 /etc/haproxy/errors/504.http
 
-# --- FRONTENDS ---
-{% include 'front-443-tcp.j2' %}
 
-# --- BACKENDS ---
-{% for vhost in haproxy_vhosts %}
-{% include 'vhosts/backend-tcp.j2' %}
+{# === FRONTS === #}
+{% include 'frontends/https_443_frontend.cfg.j2' %}
+
+
+{# === BACKS === #}
+{% for vhost in haproxy_http_vhosts if vhost.type == "http" %}
+{% if vhost.template is defined %}
+{# Si un template personnalisé est défini, on l'utilise #}
+{% include 'vhosts/' + vhost.template %}
+{% else %}
+{# Sinon, on utilise le template générique par défaut (backend simple sans websocket) #}
+backend {{ vhost.name }}_backend
+    mode http
+    option forwardfor
+    timeout server 86400s
+
+    server {{ vhost.name }} {{ vhost.backend_ip }}:{{ vhost.backend_port }} check
+
+{% endif %}
 {% endfor %}

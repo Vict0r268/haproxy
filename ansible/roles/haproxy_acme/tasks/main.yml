@@ -26,7 +26,7 @@
     --non-interactive
     --agree-tos
     -m {{ acme_email }}
-  loop: "{{ haproxy_vhosts }}"
+  loop: "{{ haproxy_http_vhosts }}"
   when: item.type == 'http'
   become: yes
 
@@ -44,7 +44,7 @@
     cat /etc/letsencrypt/live/{{ item.domain }}/fullchain.pem \
         /etc/letsencrypt/live/{{ item.domain }}/privkey.pem \
         > /etc/haproxy/certs/{{ item.domain }}.pem
-  loop: "{{ haproxy_vhosts }}"
+  loop: "{{ haproxy_http_vhosts }}"
   when: (item.type | default('http')) == 'http'
   notify: Reload HAProxy
 

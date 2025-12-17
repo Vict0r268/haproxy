@@ -1,0 +1,4 @@
+- hosts: haproxy_tcp
+  become: true
+  roles:
+    - haproxy_config_tcp

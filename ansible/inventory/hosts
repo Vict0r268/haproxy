@@ -1,2 +1,9 @@
-[haproxy]
+[haproxy_tcp]
 192.168.20.5 ansible_user=user ansible_ssh_private_key_file=/home/victor/.ssh/yes
+
+[haproxy_http]
+192.168.20.6 ansible_user=user ansible_ssh_private_key_file=/home/victor/.ssh/yes
+
+[haproxy:children]
+haproxy_tcp
+haproxy_http

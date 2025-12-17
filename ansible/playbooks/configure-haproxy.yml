@@ -1,4 +1,0 @@
-- hosts: haproxy
-  become: true
-  roles:
-    - haproxy_config
