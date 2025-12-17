@@ -8,6 +8,13 @@ haproxy_tcp_vhosts:
       ip: 192.168.45.50
       port: 443
 
+  - name: devver.app
+    frontend: 443
+    type: tcp
+    accept_rule: "{ req_ssl_sni -i devver.app }"
+    backend:
+      ip: 192.168.45.50
+      port: 443
   
   - name: app.devver.app
     frontend: 443

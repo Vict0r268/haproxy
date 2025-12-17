@@ -1,0 +1,14 @@
+frontend tcp_443
+    bind *:443
+    mode tcp
+
+    tcp-request inspect-delay 5s
+    tcp-request content accept if { req_ssl_hello_type 1 }
+
+{% for vhost in haproxy_tcp_vhosts %}
+{% if vhost.frontend == 443 and vhost.type == 'tcp' %}
+    use_backend {{ vhost.name }}_backend if {{ vhost.accept_rule }}
+{% endif %}
+{% endfor %}
+
+
