@@ -56,12 +56,12 @@ haproxy_tcp_vhosts:
       ip: 192.168.45.99
       port: 443
 
-  - name: nextcloud
+  - name: nextcloud.vrhometech.fr
     frontend: 443
     type: tcp
     accept_rule: "{ req_ssl_sni -i nextcloud.vrhometech.fr }"
     backend:
-      ip: 192.168.45.20.6
+      ip: 192.168.20.6
       port: 443
  
   
