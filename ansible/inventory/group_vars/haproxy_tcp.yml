@@ -64,6 +64,13 @@ haproxy_tcp_vhosts:
       ip: 192.168.20.6
       port: 443
  
+  - name: .media.vrhometech.fr
+    frontend: 443
+    type: tcp
+    accept_rule: "{ req_ssl_sni -m end .media.vrhometech.fr }"
+    backend:
+      ip: 192.168.10.2
+      port: 443
   
 
 
