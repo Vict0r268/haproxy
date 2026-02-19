@@ -1,65 +1,7 @@
-haproxy_tcp_vhosts:
-  
-  - name: www.devver.app
-    frontend: 443
-    type: tcp
-    accept_rule: "{ req_ssl_sni -i www.devver.app }"
-    backend:
-      ip: 192.168.45.50
-      port: 443
-
   - name: devver.app
     frontend: 443
     type: tcp
-    accept_rule: "{ req_ssl_sni -i devver.app }"
-    backend:
-      ip: 192.168.45.50
-      port: 443
-  
-  - name: app.devver.app
-    frontend: 443
-    type: tcp
-    accept_rule: "{ req_ssl_sni -i app.devver.app }"
-    backend:
-      ip: 192.168.45.50
-      port: 443
-
-  - name: docs.devver.app
-    frontend: 443
-    type: tcp
-    accept_rule: "{ req_ssl_sni -i docs.devver.app }"
-    backend:
-      ip: 192.168.45.50
-      port: 443
-
-  - name: logto.devver.app
-    frontend: 443
-    type: tcp
-    accept_rule: "{ req_ssl_sni -i logto.devver.app }"
-    backend:
-      ip: 192.168.45.50
-      port: 443
-
-  - name: auth.devver.app
-    frontend: 443
-    type: tcp
-    accept_rule: "{ req_ssl_sni -i auth.devver.app }"
-    backend:
-      ip: 192.168.45.50
-      port: 443
-
-  - name: uptime-kuma.devver.app
-    frontend: 443
-    type: tcp
-    accept_rule: "{ req_ssl_sni -i uptime-kuma.devver.app }"
-    backend:
-      ip: 192.168.45.50
-      port: 443
-
-  - name: devver
-    frontend: 443
-    type: tcp
-    accept_rule: "{ req_ssl_sni -m end k8s.devver.app }"
+    accept_rule: "{ req_ssl_sni -m end devver.app }"
     backend:
       ip: 192.168.45.99
       port: 443      
@@ -80,5 +22,6 @@ haproxy_tcp_vhosts:
       ip: 192.168.10.2
       port: 443
   
+
 
 
