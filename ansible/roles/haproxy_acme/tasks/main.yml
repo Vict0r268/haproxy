@@ -59,7 +59,7 @@
 - name: Ajouter cron pour renouvellement automatique
   cron:
     name: "Renew Let's Encrypt certificates"
-    job: "certbot renew --quiet && systemctl reload haproxy"
+    job: "/scripts/renew.sh"
     minute: "0"
     hour: "3"
   become: yes
