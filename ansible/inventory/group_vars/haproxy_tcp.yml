@@ -1,5 +1,13 @@
 haproxy_tcp_vhosts:
 
+  - name: vault.devver.app
+    frontend: 443
+    type: tcp
+    accept_rule: "{ req_ssl_sni -i vault.devver.app }"
+    backend:
+      ip: 192.168.45.40
+      port: 8200      
+
   - name: devver.app
     frontend: 443
     type: tcp
